@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/progress")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:5173")
 public class ProgressController {
 
     private final ProgressService progressService;
@@ -29,7 +30,7 @@ public class ProgressController {
         return "Progress Controller is healthy";
     }
 
-    @PostMapping()
+    @PostMapping("/add")
     public ResponseEntity<?> save(@Valid @RequestBody CreateProgressDTO createProgressDTO , BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             Map<String, String> errorMap = bindingResult
@@ -44,8 +45,8 @@ public class ProgressController {
                     .body(errorMap);
         }
         try {
-            progressService.save(createProgressDTO);
-            return ResponseEntity.ok("Progress saved successfully");
+            ResponseProgressDTO responseProgressDTO = progressService.save(createProgressDTO);
+            return ResponseEntity.ok(responseProgressDTO);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

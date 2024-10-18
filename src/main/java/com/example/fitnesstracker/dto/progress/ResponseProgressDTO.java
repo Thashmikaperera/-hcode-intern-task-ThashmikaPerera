@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,6 +19,6 @@ public class ResponseProgressDTO {
     private Long id;
     private Double weight;
     private String goal;
-    private LocalDate date;
+    private Date date;
     private Long userID;
 }

@@ -11,6 +11,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,7 +24,7 @@ public class CreateProgressDTO implements Serializable {
     @NotEmpty(message = "Goal is required")
     private String goal;
     @NotNull(message = "Date is required")
-    private LocalDate date;
+    private Date date;
     @NotNull(message = "User ID is required")
     private Long userID;
 

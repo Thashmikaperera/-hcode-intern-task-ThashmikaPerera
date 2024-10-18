@@ -28,7 +28,7 @@ public class Progress {
     private String goal;
 
     @Column(name = "date", nullable = false)
-    private LocalDate date;
+    private Date date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id" )
