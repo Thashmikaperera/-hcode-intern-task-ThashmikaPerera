@@ -1,6 +1,7 @@
 package com.example.fitnesstracker.controller;
 
 import com.example.fitnesstracker.dto.workout.CreateWorkoutDTO;
+import com.example.fitnesstracker.dto.workout.ResponseWorkoutDTO;
 import com.example.fitnesstracker.dto.workout.UpdateWorkoutDTO;
 import com.example.fitnesstracker.service.WorkoutService;
 import jakarta.validation.Valid;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/workouts")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:5173")
 public class WorkoutController {
 
     private final WorkoutService workoutService;
@@ -42,8 +44,8 @@ public class WorkoutController {
                     .body(errorMap);
         }
         try {
-            workoutService.save(createWorkoutDTO);
-            return ResponseEntity.ok("Workout saved successfully");
+            ResponseWorkoutDTO responseWorkoutDTO = workoutService.save(createWorkoutDTO);
+            return ResponseEntity.ok(responseWorkoutDTO);
         } catch (Exception e) {
             return ResponseEntity.badRequest()
                     .body(e.getMessage());
@@ -75,8 +77,8 @@ public class WorkoutController {
                     .body(errorMap);
         }
         try {
-            workoutService.update(id, updateWorkoutDTO);
-            return ResponseEntity.ok("Workout updated successfully");
+            ResponseWorkoutDTO responseWorkoutDTO =  workoutService.update(id, updateWorkoutDTO);
+            return ResponseEntity.ok(responseWorkoutDTO);
         } catch (Exception e) {
             return ResponseEntity.badRequest()
                     .body(e.getMessage());
